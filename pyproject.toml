@@ -11,10 +11,11 @@ readme = "README.md"
 license = "LICENSE"
 authors = ["Mr. Key"]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-
 [tool.poetry.urls]
 Homepage = "https://github.com/0x-key/xapp"
 Repository = "https://github.com/0x-key/xapp"
 Issues = "https://github.com/0x-key/xapp/issues"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.5"
