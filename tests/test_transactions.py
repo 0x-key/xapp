@@ -1,10 +1,10 @@
 """ Test Transaction Router """
 from datetime import datetime
 from app.models.expenses import ExpenseCategory
-from app.models.transactions import TransactionType, TransactionId, PreTransaction, Transactions
+from app.models.transactions import TransactionType, TransactionId, PreTransaction, Transactions, Transaction
 from .test_app import client
 
-
+valid_transaction_id = None
 
 def test_get_transactions_empty():
     """ Test get transactions when there isn't one registered. """
@@ -18,6 +18,7 @@ def test_get_transactions_empty():
 
 def test_register_transaction():
     """ Test add transaction. """
+    global valid_transaction_id
     response = client.post(
         url="/transactions",
         content=PreTransaction(
@@ -30,7 +31,8 @@ def test_register_transaction():
         ).model_dump_json(),
     )
     assert response.status_code == 200
-    assert TransactionId(**response.json())
+    response = TransactionId(**response.json())
+    valid_transaction_id = response.id
 
 def test_get_transaction():
     """ Test get transaction endpoint. """
@@ -38,4 +40,19 @@ def test_get_transaction():
         url="/transactions",
     )
     assert response.status_code == 200
-    assert Transactions(**response.json())
+    transactions = Transactions(**response.json())
+    assert len(transactions.transactions) == 1
+
+def test_get_transaction_by_id():
+    response = client.get(
+        url=f"/transactions/{valid_transaction_id}",
+    )
+    assert response.status_code == 200
+    assert Transaction(**response.json())
+
+def test_get_transaction_by_id_non_existent():
+    transaction_id = "notregisteredtransactionid"
+    response = client.get(
+        url=f"/transactions/{transaction_id}",
+    )
+    assert response.status_code == 404
