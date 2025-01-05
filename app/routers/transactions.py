@@ -1,4 +1,4 @@
-""" Expenses Router """
+""" Transactions Router """
 from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException

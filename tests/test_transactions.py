@@ -44,6 +44,7 @@ def test_get_transaction():
     assert len(transactions.transactions) == 1
 
 def test_get_transaction_by_id():
+    """ Test get transaction by id. """
     response = client.get(
         url=f"/transactions/{valid_transaction_id}",
     )
@@ -51,6 +52,7 @@ def test_get_transaction_by_id():
     assert Transaction(**response.json())
 
 def test_get_transaction_by_id_non_existent():
+    """ Test get transaction by id on non-existent id. """
     transaction_id = "notregisteredtransactionid"
     response = client.get(
         url=f"/transactions/{transaction_id}",
