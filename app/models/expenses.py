@@ -1,0 +1,31 @@
+""" Expense Categories Model """
+from enum import StrEnum, auto
+
+
+class ExpenseCategory(StrEnum):
+    housing = auto()
+    transportation = auto()
+    groceries = auto()
+    insurance = auto()
+    healthcare = auto()
+    debt_repayment = auto()
+    tax = auto()
+    capital = auto()
+    savings = auto()
+    investments = auto()
+    entertainment = auto()
+    clothing = auto()
+    personal_care = auto()
+    family = auto()
+    education = auto()
+    self_improvement = auto()
+    gift = auto()
+    water = auto()
+    gas = auto()
+    electricity = auto()
+    internet = auto()
+    mobile = auto()
+    technology = auto()
+    vacations = auto()
+    gymnasium = auto()
+    other = auto()
